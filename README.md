@@ -70,8 +70,19 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
 ></iframe>
 
 ### Univariate Analysis
-
+<iframe
+  src="assets/rally_length_by_end_type.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 ### Bivariate Analysis
+<iframe
+  src="assets/rally_length_vs_dink_count.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Aggregates
 
