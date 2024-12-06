@@ -95,6 +95,7 @@ In order to create our model, we wanted to break down the number of shots hit by
 
 We created a final analysis dataframe, where along with other columns from the original dataframe, we used the shots dataframe to count the number of dinks, speedups, and lobs that each team hit, along with who was first to speedup.
 
+## TO DO: put in final_csv.html here
 
 ### Imputation
 We did not have to impute any values, we ended up not grabbing any rows where there were na values for the rally. The only 'imputation' we did was fill the 'first_to_speedup' column with 'NaN' if neither team hit a speedup shot in the rally.
@@ -106,3 +107,5 @@ We didn't fill any missing values because we didn't grab them, because we didn't
 ## Baseline Model
 
 ## Final Model
+
+## Conclusion
