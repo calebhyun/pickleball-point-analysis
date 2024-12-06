@@ -152,12 +152,39 @@ This is a binary classification problem, and we are going to utilize the accurac
 
 
 ## Baseline Model
+
+Features: The baseline model uses rally length, serve team dink count (quantitative), and third shot type (nominal).
+
+Data Transformations:
+
+Numerical: rally_len and serve_dink_count are scaled with StandardScaler to ensure consistent feature scaling. Categorical: ts_type is one-hot encoded with handle_unknown='ignore', enabling binary representation and handling unseen categories.
+
+Modeling Steps:
+
+Train-Test Split: The dataset is split to ensure unbiased performance evaluation on unseen data. Pipeline: A ColumnTransformer scales numerical features and encodes categorical ones, feeding transformed data to a LogisticRegression model. The same transformations are applied to the test set during prediction.
+
+Evaluation:
+
+Performance is assessed using a classification report (precision, recall, F1-score) and a confusion matrix.
+
+Classification Report:
+               precision    recall  f1-score   support
+
+       False       0.61      0.93      0.74       316
+        True       0.46      0.09      0.15       208
+
+    accuracy                           0.60       524
+   macro avg       0.53      0.51      0.44       524
+weighted avg       0.55      0.60      0.50       524
+
+
 <iframe
   src="assets/baseline_confusion_matrix.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
 ## Final Model
 
 ## Conclusion
