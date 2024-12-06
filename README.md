@@ -152,7 +152,12 @@ This is a binary classification problem, and we are going to utilize the accurac
 
 
 ## Baseline Model
-
+<iframe
+  src="assets/baseline_confusion_matrix.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 ## Final Model
 
 ## Conclusion
