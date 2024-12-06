@@ -6,13 +6,13 @@ Maxwell Cooper - maxwcoop@gmail.com
 
 ## Introduction
 
-This dataset is a collection of professional pickleball matches found at pklmart.com. We were able to get 2 main dataframes through the use of the pklshop API. One dataframe contained information about 2500+ rallies across different 50 different pickleball matches. The next dataframe contained information about 22,000 shots from these rallies. We combined the results of these two dataframes into a final dataframe.
+This dataset is a collection of professional pickleball doubles matches found at pklmart.com. We were able to get 2 main dataframes through the use of the pklshop API. One dataframe contained information about 2500+ rallies across different 50 different pickleball matches. The next dataframe contained information about 22,000 shots from these rallies. We combined the results of these two dataframes into a final dataframe.
 
 ### Point Analysis
 
 Through the use of this dataframe, we hope to be able to predict the winner of an individual pickleball point through machine learning models based on metrics found in these datasets. 
 
-After we have created a model, we will analyze the classifiers that made up this model, and attempt to identify the most important features of what makes a winning point for each team. 
+After we have created a model, we will analyze the classifiers that made up this model, and attempt to identify the most important features of what makes a winning point for each team. Ultimately, we would like to identify what exactly makes up a win in a doubles match to help improve pickleball performance.
 
 The columns we will utilize are as follows:
 
@@ -98,22 +98,23 @@ In order to create our model, we wanted to break down the number of shots hit by
 
 We created a final analysis dataframe, where along with other columns from the original dataframe, we used the shots dataframe to count the number of dinks, speedups, and lobs that each team hit, along with who was first to speedup.
 
-| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   |
-|:------------|:--------------|:-----------|:----------|:-----------------|
-| T1          | T2            | R47        | Drop      | N                |
-| T1          | T1            | R49        | Drop      | Y                |
-| T2          | T1            | R52        | Drop      | N                |
-| T2          | T1            | R1         | Drive     | N                |
-| T2          | T2            | R2         | Drop      | Y                |
+### Final DataFrame
+| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind  |
+|:------------|:--------------|:-----------|:----------|:-----------------|:-----------------|
+| T1          | T2            | R47        | Drop      | N                | N                |
+| T1          | T1            | R49        | Drop      | Y                | N                |
+| T2          | T1            | R52        | Drop      | N                | N                |
+| T2          | T1            | R1         | Drive     | N                | Y                |
+| T2          | T2            | R2         | Drop      | Y                | N                |
 
 
-| rtrn_switch_ind   | srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |
-|:------------------|:-----------------------|:------------------------|------------:|-------------------:|
-| N                 | Y                      | N                       |           7 |                  1 |
-| N                 | N                      | Y                       |           9 |                  0 |
-| N                 | Y                      | Y                       |           7 |                  0 |
-| Y                 | N                      | N                       |           5 |                  0 |
-| N                 | N                      | N                       |          21 |                  4 |
+| srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |
+|:-----------------------|:------------------------|------------:|-------------------:|
+| Y                      | N                       |           7 |                  1 |
+| N                      | Y                       |           9 |                  0 |
+| Y                      | Y                       |           7 |                  0 |
+| N                      | N                       |           5 |                  0 |
+| N                      | N                       |          21 |                  4 |
 
 
 |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R |
@@ -133,12 +134,20 @@ We created a final analysis dataframe, where along with other columns from the o
 | nan                | False          |
 | S                  | True           |
 
+These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are 'srv_team_id' and 'rally_id', these columns are just indexes essentially. They helped us match up shot data to be aggregated into the final dataframe. 
+
+This dataframe is what we will be running our models on. We are going to utilize multiple features to predict the outcome of an individual point 
+
 ### Imputation
 We did not have to impute any values, we ended up not grabbing any rows where there were na values for the rally. The only 'imputation' we did was fill the 'first_to_speedup' column with 'NaN' if neither team hit a speedup shot in the rally.
 
 We didn't fill any missing values because we didn't grab them, because we didn't want to predict on made-up data through imputation. We wanted to predict the outcome of points where we had all necessary data present.
 
 ## Framing a Prediction Problem
+We are going to predict the results of column 'w_team_id' which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
+
+This is a binary classification problem, and we are going to utilize the accuracy score to determine how effective our model was. Accuracy will let us understand how accurate our predictions were to the actual result of the point over the span of all of our points. 
+
 
 ## Baseline Model
 
