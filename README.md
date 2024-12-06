@@ -76,6 +76,12 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   height="600"
   frameborder="0"
 ></iframe>
+<iframe
+  src="assets/shot_type_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 ### Bivariate Analysis
 <iframe
   src="assets/rally_length_vs_dink_count.html"
@@ -83,12 +89,7 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   height="600"
   frameborder="0"
 ></iframe>
-<iframe
-  src="assets/shot_type_distribution.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+
 
 ### Interesting Aggregates
 In order to create our model, we wanted to break down the number of shots hit by each team, as we originally only had the number of a shot hit during the point.
