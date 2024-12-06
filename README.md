@@ -174,8 +174,7 @@ Classification Report:
         True       0.46      0.09      0.15       208
 
     accuracy                           0.60       524
-   macro avg       0.53      0.51      0.44       524
-weighted avg       0.55      0.60      0.50       524
+ 
 
 
 <iframe
@@ -186,5 +185,18 @@ weighted avg       0.55      0.60      0.50       524
 ></iframe>
 
 ## Final Model
+Classification Report:
+               precision    recall  f1-score   support
 
+       False       0.67      0.80      0.73       316
+        True       0.57      0.41      0.48       208
+
+    accuracy                           0.65       524
+    Best Cross-Validation Accuracy: 0.5949079959852793
+<iframe
+  src="assets/final_confusion_matrix.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 ## Conclusion
