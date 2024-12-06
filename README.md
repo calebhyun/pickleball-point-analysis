@@ -89,9 +89,17 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   height="600"
   frameborder="0"
 ></iframe>
+
 ### Interesting Aggregates
+In order to create our model, we wanted to break down the number of shots hit by each team, as we originally only had the number of a shot hit during the point.
+
+We created a final analysis dataframe, where along with other columns from the original dataframe, we used the shots dataframe to count the number of dinks, speedups, and lobs that each team hit, along with who was first to speedup.
+
 
 ### Imputation
+We did not have to impute any values, we ended up not grabbing any rows where there were na values for the rally. The only 'imputation' we did was fill the 'first_to_speedup' column with 'NaN' if neither team hit a speedup shot in the rally.
+
+We didn't fill any missing values because we didn't grab them, because we didn't want to predict on made-up data through imputation. We wanted to predict the outcome of points where we had all necessary data present.
 
 ## Framing a Prediction Problem
 
