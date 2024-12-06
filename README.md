@@ -99,13 +99,13 @@ In order to create our model, we wanted to break down the number of shots hit by
 We created a final analysis dataframe, where along with other columns from the original dataframe, we used the shots dataframe to count the number of dinks, speedups, and lobs that each team hit, along with who was first to speedup.
 
 ### Final DataFrame
-| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind  |
-|:------------|:--------------|:-----------|:----------|:-----------------|:-----------------|
-| T1          | T2            | R47        | Drop      | N                | N                |
-| T1          | T1            | R49        | Drop      | Y                | N                |
-| T2          | T1            | R52        | Drop      | N                | N                |
-| T2          | T1            | R1         | Drive     | N                | Y                |
-| T2          | T2            | R2         | Drop      | Y                | N                |
+| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind   |
+|:------------|:--------------|:-----------|:----------|:-----------------|:------------------|
+| T1          | T2            | R47        | Drop      | N                | N                 |
+| T1          | T1            | R49        | Drop      | Y                | N                 |
+| T2          | T1            | R52        | Drop      | N                | N                 |
+| T2          | T1            | R1         | Drive     | N                | Y                 |
+| T2          | T2            | R2         | Drop      | Y                | N                 |
 
 
 | srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |
