@@ -43,6 +43,40 @@ The columns we will utilize are as follows:
 
 ## Data Cleaning and Exploratory Data Analysis
 
+The pklshop API allowed us to get 2 main datasets. One was a dataset containing rallies indexed by game it occured in. The next was shots indexed by each rally.
+
+We will now combine these datasets into a final dataset of rallies indexed by game. But this dataset would now contain additional information that we got from the shots dataframe.
+
+The specific metrics we pulled are: Serve and Return team Dink Count, Serve and Return team Speedup count, Serve and Return Team lob count, and which team did a speedup first.
+
+### Data Cleaning
+First, we have to create a combined_rallies dataset by appending all of the rallies game by game.
+
+Similarly, we accessed the shots rally by rally, to create our final combined_shots dataset: 
+
+      combined_rallies.columns:
+            Index(['rally_id', 'match_id', 'game_id', 'rally_nbr', 'srv_team_id',
+             'srv_player_id', 'rtrn_team_id', 'rtrn_player_id', 'ts_player_id',
+             'ts_type', 'w_team_id', 'to_ind', 'to_team_id', 'rally_len',
+             'srv_switch_ind', 'rtrn_switch_ind', 'srv_team_flipped_ind',
+             'rtrn_team_flipped_ind', 'ending_type', 'ending_player_id', 'lob_cnt',
+             'dink_cnt', 'maint_dtm', 'maint_app', 'create_dtm', 'create_app'],
+            dtype='object')
+<iframe
+  src="assets/combined_shots_table.md"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Univariate Analysis
+
+### Bivariate Analysis
+
+### Interesting Aggregates
+
+### Imputation
+
 ## Framing a Prediction Problem
 
 ## Baseline Model
