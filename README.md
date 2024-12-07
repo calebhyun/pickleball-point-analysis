@@ -125,31 +125,20 @@ We created a final analysis dataframe, where along with other columns from the o
 ### Final DataFrame
 
 
-| w_team_id | srv_team_id | rally_id | ts_type | srv_switch_ind | rtrn_switch_ind |
-|-----------|-------------|----------|---------|----------------|-----------------|
-| T1        | T2          | R47      | Drop    | N              | N               |
-| T1        | T1          | R49      | Drop    | Y              | N               |
-| T2        | T1          | R52      | Drop    | N              | N               |
-| T2        | T1          | R1       | Drive   | N              | Y               |
-| T2        | T2          | R2       | Drop    | Y              | N               |
-
-
-| srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |
-|:-----------------------|:------------------------|------------:|-------------------:|
-| Y                      | N                       |           7 |                  1 |
-| N                      | Y                       |           9 |                  0 |
-| Y                      | Y                       |           7 |                  0 |
-| N                      | N                       |           5 |                  0 |
-| N                      | N                       |          21 |                  4 |
-
-
-|   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R |
-|--------------------:|------------------:|------------------:|--------------:|--------------:|
-|                   1 |                 0 |                 1 |             0 |             0 |
-|                   1 |                 1 |                 0 |             0 |             0 |
-|                   0 |                 0 |                 0 |             1 |             0 |
+| w_team_id | srv_team_id | rally_id | ts_type | srv_switch_ind | rtrn_switch_ind | |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R |
+|-----------|-------------|----------|---------|----------------|-----------------| |--------------------:|------------------:|------------------:|--------------:|--------------:|
+| T1        | T2          | R47      | Drop    | N              | N               | |                   1 |                 0 |                 1 |             0 |             0 |
+| T1        | T1          | R49      | Drop    | Y              | N               | |                   1 |                 1 |                 0 |             0 |             0 |
+| T2        | T1          | R52      | Drop    | N              | N               | |                   0 |                 0 |                 0 |             1 |             0 |
+| T2        | T1          | R1       | Drive   | N              | Y               | 
 |                   0 |                 0 |                 0 |             0 |             0 |
-|                   4 |                 1 |                 0 |             0 |             0 |
+| T2        | T2          | R2       | Drop    | Y              | N               | |                   4 |                 1 |                 0 |             0 |             0 |
+
+
+
+
+
+
 
 
 | first_to_speedup   | srv_team_won   |
