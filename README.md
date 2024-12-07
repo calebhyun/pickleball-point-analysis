@@ -1,8 +1,8 @@
 # Pickleball Point Analysis
 
-Caleb Hyun - <a href='mailto:ckhyun@umich.edu'>ckhyun@umich.edu</a>
+Caleb Hyun - ckhyun@umich.edu
 
-Maxwell Cooper - <a href='mailto:maxwcoop@gmail.com'>maxwcoop@gmail.com</a>
+Maxwell Cooper - maxwcoop@gmail.com
 
 ## Introduction
 
@@ -115,7 +115,29 @@ Additionally, we might want to analyze some of these shot types, in terms of whe
 
 This plot charts the comparison between rally length and dink count, but also includes the type of shot ending it had. From it, we can see that most of the low dink count, low rally length points ended in errors or unforced errors. As points went longer over 20 rallys with under 15 dinks they started ending with winners or another type of ending.
 
-## To DO: insert two interesting bivariate analyses
+The following are three charts of shot locations that we found to be interesting.
+
+**Third Shot Drop Locations**
+
+<img src="assets/tsDrp_shots.png" alt="Third Shot Drop Locations" width="500">
+
+As we can see from this image, the majority of the third shot drop locations are hit from the baseline. We can assume this means that the returned ball to the serving team was hit hard and deep into the court, forcing the serving team to hit a drop rather than a lob or a drive.
+
+**Third Shot Drive Locations**
+
+<img src="assets/tsDrp_shots.png" alt="Third Shot Drive Locations" width="500">
+
+From this image, we can see that the third shot drives are commonly hit from the baseline as well, but with one major difference from the third shot drop locations being that they were farther up and had a lower precision targeted on the baseline. This is reflected in professional gameplay, where players will opt for a third shot drive when the return ball is hit weaker and closer to the net.
+
+**Lob Locations**
+
+<img src="assets/lob_shots.png" alt="Lob Locations" width="500">
+
+This image demonstrates the lob locations in the matches. We can see that there are three hotspots where lobs are hit. The largest region is the back middle section, where players will be in 'no man's land' between the baseline and the kitchen area. This can force many awkward lobs. It is also where opponents' lobs land, so it could also be the locations of a counter lob, after the team was already lobbed in the shot before.
+
+The next location is the right player's kitchen spot. This is interesting because the right player is hitting more lobs than the last hotspot of the left player's kitchen spot.
+
+
 
 ### Interesting Aggregates
 In order to create our model, we wanted to break down the number of shots hit by each team, as we originally only had the number of a shot hit during the point.
@@ -124,7 +146,13 @@ We created a final analysis dataframe, where along with other columns from the o
 
 ### Final DataFrame
 
-# insert html here!
+| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind   | srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R | first_to_speedup   | srv_team_won   |
+|:------------|:--------------|:-----------|:----------|:-----------------|:------------------|:-----------------------|:------------------------|------------:|-------------------:|--------------------:|------------------:|------------------:|--------------:|--------------:|:-------------------|:---------------|
+| T1          | T2            | R47        | Drop      | N                | N                 | Y                      | N                       |           7 |                  1 |                   1 |                 0 |                 1 |             0 |             0 | R                  | False          |
+| T1          | T1            | R49        | Drop      | Y                | N                 | N                      | Y                       |           9 |                  0 |                   1 |                 1 |                 0 |             0 |             0 | S                  | True           |
+| T2          | T1            | R52        | Drop      | N                | N                 | Y                      | Y                       |           7 |                  0 |                   0 |                 0 |                 0 |             1 |             0 | nan                | False          |
+| T2          | T1            | R1         | Drive     | N                | Y                 | N                      | N                       |           5 |                  0 |                   0 |                 0 |                 0 |             0 |             0 | nan                | False          |
+| T2          | T2            | R2         | Drop      | Y                | N                 | N                      | N                       |          21 |                  4 |                   4 |                 1 |                 0 |             0 |             0 | S                  | True           |
 
 These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are `srv_team_id` and `rally_id`: these columns are just indexes. They helped us match up shot data to be aggregated into the final dataframe. 
 
@@ -184,26 +212,20 @@ While our Baseline model seemed to have reasonable accuracy, we noticed that the
 
 For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering 4 new features and tuning hyperparameters using GridSearchCV.
 
-# Final Model: Random Forest Classifier
-
-For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering new features and tuning hyperparameters using **GridSearchCV**.
-
-## **Feature Engineering**
+### **Feature Engineering**
 1. **Interaction Features**
-   - **`dink_count_dif`:** Difference between serve and return dink counts. This captures the net dominance in dinks.
-   - **`speedup_count_dif`:** Difference between serve and return speedups. This reflects aggression levels in rallies.
-   - **`lob_count_dif`:** Difference between serve and return teams lobs.
+   - **`dink_count_dif`:** Difference between serve and return dink counts. This describes the net dominance in dinks.
+   - **`speedup_count_dif`:** Difference between serve and return speedups. This describes aggression levels in rallies.
+   - **`lob_count_dif`:** Difference between serve and return count of lobs. 
 
 2. **Categorical Transformation**
-   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories.
-   - Binary encoding for features like `srv_switch_ind`.
+   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories, as we believed that once both teams have gotten past a certain number of shots, the inherent advantage the return team has goes away. We then one hot encoded these columns.
+   - we used binary encoding for features like `srv_switch_ind`.
 
-## **Modeling Algorithm**
-- **Random Forest Classifier**: We chose the random forest model because it inherently models the complex, non-linear features better than a logistic regression model. It can also capture interactions between the features better than logistic regression.
-- **Hyperparameter Tuning**:
-  - **`n_estimators`:** Number of trees in the forest. Tuning this controls the trade-off between model accuracy and training time, as more trees typically improve performance up to a point.
-  - **`max_depth`:** Controls tree depth to prevent overfitting. Tuning this ensures that trees are not too deep (overfitting) or too shallow (underfitting), balancing model complexity.
-  - **`classifier_min_samples_split`:** Controls the minimum number of samples to split a node in a decision tree. Tuning this prevents overly complex trees by ensuring splits occur only when enough data supports them.
+### **Modeling Algorithm**
+- **Random Forest Classifier**: We chose the Random Forest Classifier for its ability to capture complex feature interactions and handle a mix of numerical and categorical features. We hoped that the Random Forest would inherently be able to better model the complex, non-linear relationships between many of these features than Logistic Regression (for example, dink count vs speedup count).
+
+
 
 ### **Performance Evaluation**
 - **Test Set Results**:
@@ -230,7 +252,17 @@ Classification Report:
   frameborder="0"
 ></iframe>
 
-![Feature Importance with Directionality](assets/Feature_importance-directional.png "Feature Impotrance")
+### Feature Analysis
+One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
+
+
+**Feature Importance with Directionality**
+
+<img src="assets/Feature_importance-directional.png" alt="Feature Importance with Directionality" width="800">
+
+**Dink Count Difference Impacts**
+
+<img src="assets/dink_count_dif_chart.png" alt="Dink Count Difference Impacts" width="500">
 
 ## Interesting Insights:
 
