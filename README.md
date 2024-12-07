@@ -125,7 +125,13 @@ We created a final analysis dataframe, where along with other columns from the o
 ### Final DataFrame
 
 
-# insert html here!
+| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind   | srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R | first_to_speedup   | srv_team_won   |
+|:------------|:--------------|:-----------|:----------|:-----------------|:------------------|:-----------------------|:------------------------|------------:|-------------------:|--------------------:|------------------:|------------------:|--------------:|--------------:|:-------------------|:---------------|
+| T1          | T2            | R47        | Drop      | N                | N                 | Y                      | N                       |           7 |                  1 |                   1 |                 0 |                 1 |             0 |             0 | R                  | False          |
+| T1          | T1            | R49        | Drop      | Y                | N                 | N                      | Y                       |           9 |                  0 |                   1 |                 1 |                 0 |             0 |             0 | S                  | True           |
+| T2          | T1            | R52        | Drop      | N                | N                 | Y                      | Y                       |           7 |                  0 |                   0 |                 0 |                 0 |             1 |             0 | nan                | False          |
+| T2          | T1            | R1         | Drive     | N                | Y                 | N                      | N                       |           5 |                  0 |                   0 |                 0 |                 0 |             0 |             0 | nan                | False          |
+| T2          | T2            | R2         | Drop      | Y                | N                 | N                      | N                       |          21 |                  4 |                   4 |                 1 |                 0 |             0 |             0 | S                  | True           |
 
 These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are `srv_team_id` and `rally_id`, these columns are just indexes essentially. They helped us match up shot data to be aggregated into the final dataframe. 
 
