@@ -4,6 +4,9 @@ Caleb Hyun - <a href='mailto:ckhyun@umich.edu'>ckhyun@umich.edu</a>
 
 Maxwell Cooper - <a href='mailto:maxwcoop@gmail.com'>maxwcoop@gmail.com</a>
 
+<a href='https://colab.research.google.com/drive/188fhIAnGwSyy9-qEvqacct2RG3GNOzxK?usp=sharing'> Link to Analysis <\a>
+
+
 ## Introduction
 
 We analyzed a dataset of professional pickleball doubles matches found at pklmart.com. We were able to get 2 main dataframes through the pklshop API. One dataframe contained information about 2500+ rallies across different 50 different professional pickleball matches. We also had information about 22,000 shots from these rallies, which we combined into a final dataframe.
