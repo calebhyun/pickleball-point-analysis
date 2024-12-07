@@ -91,18 +91,18 @@ Since there are a considerable amount of unforced error points, we will look at 
 
 From this chart we can examine a number of things. Here are the descriptions and analyses of each category from left to right:
       
-      'O' is for other, and a majority of the shots are uncategorized based on this
-      'D' is for dink, this is to be expected because the sport centers around dinks
-      'SE' is the serves 
-      'R' is the returns
-      'tsDrp' is the number of third shot drives
-      'tsDrv' is the number of third shot drops
+      `O` is for other, and a majority of the shots are uncategorized based on this
+      `D` is for dink, this is to be expected because the sport centers around dinks
+      `SE` is the serves 
+      `R` is the returns
+      `tsDrp` is the number of third shot drives
+      `tsDrv` is the number of third shot drops
             interestingly enough, the third shot drop is more popular than the drive
-      'SP' is for speed ups
-      'L' is the number of lobs, we expect this, as lobs are not very popular 
-      'E' is for ernies, or shots where a player jumps over the kitchen to hit a volley
-      'tsL' is the number of third shot lobs, where this is clearly a last resort third shot
-      'A' is ATP's or around the post shots where the ball doesn't travel over the net
+      `SP` is for speed ups
+      `L` is the number of lobs, we expect this, as lobs are not very popular 
+      `E` is for ernies, or shots where a player jumps over the kitchen to hit a volley
+      `tsL` is the number of third shot lobs, where this is clearly a last resort third shot
+      `A` is ATP's or around the post shots where the ball doesn't travel over the net
 
 Additionally, we might want to analyze some of these shot types, in terms of whether or not the type of third shot weighs a large part of the winner, or we could want to look at which team hit a speed up shot first during the point.
 ### Bivariate Analysis
@@ -125,41 +125,19 @@ We created a final analysis dataframe, where along with other columns from the o
 ### Final DataFrame
 
 
-| w_team_id | srv_team_id | rally_id | ts_type | srv_switch_ind | rtrn_switch_ind | |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R |
-|-----------|-------------|----------|---------|----------------|-----------------| |--------------------:|------------------:|------------------:|--------------:|--------------:|
-| T1        | T2          | R47      | Drop    | N              | N               | |                   1 |                 0 |                 1 |             0 |             0 |
-| T1        | T1          | R49      | Drop    | Y              | N               | |                   1 |                 1 |                 0 |             0 |             0 |
-| T2        | T1          | R52      | Drop    | N              | N               | |                   0 |                 0 |                 0 |             1 |             0 |
-| T2        | T1          | R1       | Drive   | N              | Y               | 
-|                   0 |                 0 |                 0 |             0 |             0 |
-| T2        | T2          | R2       | Drop    | Y              | N               | |                   4 |                 1 |                 0 |             0 |             0 |
+# insert html here!
 
-
-
-
-
-
-
-
-| first_to_speedup   | srv_team_won   |
-|:-------------------|:---------------|
-| R                  | False          |
-| S                  | True           |
-| nan                | False          |
-| nan                | False          |
-| S                  | True           |
-
-These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are 'srv_team_id' and 'rally_id', these columns are just indexes essentially. They helped us match up shot data to be aggregated into the final dataframe. 
+These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are `srv_team_id` and `rally_id`, these columns are just indexes essentially. They helped us match up shot data to be aggregated into the final dataframe. 
 
 This dataframe is what we will be running our models on. We are going to utilize multiple features to predict the outcome of an individual point 
 
 ### Imputation
-We did not have to impute any values, we ended up not grabbing any rows where there were na values for the rally. The only 'imputation' we did was fill the 'first_to_speedup' column with 'NaN' if neither team hit a speedup shot in the rally.
+We did not have to impute any values, we ended up not grabbing any rows where there were na values for the rally. The only 'imputation' we did was fill the `first_to_speedup` column with 'NaN' if neither team hit a speedup shot in the rally.
 
 We didn't fill any missing values because we didn't grab them, because we didn't want to predict on made-up data through imputation. We wanted to predict the outcome of points where we had all necessary data present.
 
 ## Framing a Prediction Problem
-We are going to predict the results of column 'Serve_team_won' which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
+We are going to predict the results of column `Serve_team_won` which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
 
 This is a binary classification problem, and we are going to utilize the accuracy score to determine how effective our model was. Accuracy will let us understand how accurate our predictions were to the actual result of the point over the span of all of our points. 
 
@@ -169,21 +147,18 @@ On top of this, since we would like to determine what factors make up a winning 
 
 Features: The baseline model uses rally length, serve team dink count (quantitative), and third shot type (nominal).
 
-Data Transformations:
+**Data Transformations:**
 
 Numerical: rally_len and serve_dink_count are scaled with StandardScaler to ensure consistent feature scaling. Categorical: ts_type is one-hot encoded with handle_unknown='ignore', enabling binary representation and handling unseen categories.
 
-Modeling Steps:
+**Modeling Steps:**
 
 Train-Test Split: The dataset is split to ensure unbiased performance evaluation on unseen data. 
 
 Pipeline: A ColumnTransformer scales numerical features and encodes categorical ones, feeding transformed data to a LogisticRegression model. The same transformations are applied to the test set during prediction.
 
-Evaluation:
 
-While our Baseline model seemed to have reasonable accuracy, we noticed that the model was picking False much too often, likely because of the fact that the return team has an inherent ~10% advantage starting the point. However, even when the model WAS picking True, it was getting it wrong more than 50% of the time. This can help explain why the f1-score is so low for 'True' predictions. We assessed the performance using a classification report (precision, recall, F1-score) and a confusion matrix.
-
-Classification Report:
+**Classification Report:**
       
                precision    recall  f1-score   support
        False       0.61      0.93      0.74       316
@@ -199,6 +174,11 @@ Classification Report:
   height="600"
   frameborder="0"
 ></iframe>
+
+**Evaluation:**
+
+While our Baseline model seemed to have reasonable accuracy, we noticed that the model was picking False much too often, likely because of the fact that the return team has an inherent ~10% advantage starting the point. However, even when the model WAS picking True, it was getting it wrong more than 50% of the time. This can help explain why the f1-score is so low for 'True' predictions. We assessed the performance using a classification report (precision, recall, F1-score) and a confusion matrix.
+
 
 ## Final Model
 ### Random Forest Classifier
@@ -218,9 +198,7 @@ For the final model, we used a **Random Forest Classifier** and improved upon th
 ### **Modeling Algorithm**
 - **Random Forest Classifier**: We chose the Random Forest Classifier for its ability to capture complex feature interactions and handle a mix of numerical and categorical features. We hoped that the Random Forest would inherently be able to better model the complex, non-linear relationships between many of these features than Logistic Regression (for example, dink count vs speedup count).
 
-### **Hyperparameter Tuning Results**
-- **Best Parameters**: `{'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 5}`
-- **Best Cross-Validation Accuracy**: **~90%** huh is this right?
+
 
 ### **Performance Evaluation**
 - **Test Set Results**:
