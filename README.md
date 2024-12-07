@@ -258,7 +258,7 @@ One of our stated goals was to figure out how we could change our game based on 
 
 **Feature Importance with Directionality**
 
-<img src="assets/Feature_importance-directional.png" alt="Feature Importance with Directionality" width="500">
+<img src="assets/Feature_importance-directional.png" alt="Feature Importance with Directionality" width="800">
 
 **Dink Count Difference Impacts**
 
