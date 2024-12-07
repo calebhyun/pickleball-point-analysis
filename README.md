@@ -88,8 +88,7 @@ Since there are a considerable amount of unforced error points, we will look at 
   height="600"
   frameborder="0"
 ></iframe>
-First of all, that a majority of the shots aren't categorized, or are 'O' for other:
-'D' for Dink which is what is expected as the game of pickleball is centered around the net
+
 From this chart we can examine a number of things. Here are the descriptions and analyses of each category from left to right:
       
       'O' is for other, and a majority of the shots are uncategorized based on this
