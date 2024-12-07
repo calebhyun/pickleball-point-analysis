@@ -78,7 +78,9 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   frameborder="0"
 ></iframe>
 
-This plot is a collection of 4 box and whisker plots. As we can see from the chart, a majority of the unforced errors, and normal errors occur earlier in a point, typically within 5 or 6 shots. The majority of the winners occur after the 8 or 9 shot mark.
+This plot is a collection of 4 box and whisker plots. As we can see from the chart, a majority of the unforced errors, and normal errors occur earlier in a point, typically within 5 or 6 shots. The majority of the winners occur after the 8 or 9 shot mark. This causes us to want to look into the rally length as a distinguishing factor of our eventual model.
+
+Since there are a considerable amount of unforced error points, we will look at removing this column because they are classified as a mistake made by the losing team, not because of the opposing team's effort.
 
 <iframe
   src="assets/shot_type_distribution.html"
@@ -102,7 +104,8 @@ From this chart we can examine a number of things. Here are the descriptions and
       'E' is for ernies, or shots where a player jumps over the kitchen to hit a volley
       'tsL' is the number of third shot lobs, where this is clearly a last resort third shot
       'A' is ATP's or around the post shots where the ball doesn't travel over the net
-      
+
+Additionally, we might want to analyze some of these shot types, in terms of whether or not the type of third shot weighs a large part of the winner, or we could want to look at which team hit a speed up shot first during the point.
 ### Bivariate Analysis
 <iframe
   src="assets/rally_length_vs_dink_count.html"
@@ -172,6 +175,7 @@ We are going to predict the results of column 'Serve_team_won' which is a binary
 
 This is a binary classification problem, and we are going to utilize the accuracy score to determine how effective our model was. Accuracy will let us understand how accurate our predictions were to the actual result of the point over the span of all of our points. 
 
+On top of this, since we would like to determine what factors make up a winning point, we excluded any row that has an ending classified as an **'Unforced Error'**. This allows us to get more accurate data for a winning point with either a forced error, winner, or other, not a classified mistake by a player.
 
 ## Baseline Model
 
@@ -183,7 +187,9 @@ Numerical: rally_len and serve_dink_count are scaled with StandardScaler to ensu
 
 Modeling Steps:
 
-Train-Test Split: The dataset is split to ensure unbiased performance evaluation on unseen data. Pipeline: A ColumnTransformer scales numerical features and encodes categorical ones, feeding transformed data to a LogisticRegression model. The same transformations are applied to the test set during prediction.
+Train-Test Split: The dataset is split to ensure unbiased performance evaluation on unseen data. 
+
+Pipeline: A ColumnTransformer scales numerical features and encodes categorical ones, feeding transformed data to a LogisticRegression model. The same transformations are applied to the test set during prediction.
 
 Evaluation:
 
