@@ -228,6 +228,24 @@ Classification Report:
 ### Hyperparameter Analysis
 One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
 
+## Interesting Insights:
+
+Qualifiers - Our model is not perfect by any means, and this was trained on pro matches, so the takeaways may be different than amateur matches.
+
+**Influence of `ts_type`:**
+The model predicts a higher probability of the serving team winning when the shot type is 'Drive' compared to 'Drop' or 'Lob.' However, this reflects a correlation observed in the data and does not necessarily imply causation. For example, we saw that drives are generally hit off of shallower returns. Lobs seem to be the least effective third shot.
+
+NaN being high in this graph makes sense, as when a third shot is not hit, it was likely off of an error in the return.
+
+**Influence of `First to Speed Up`:**
+Interestingly, the team to speed up first is strongly predicted to win the point, according to our model.
+
+**Influence of `rally_len_categorical`:**
+Something that surprised us was that the length of the category didn't seem to affect the prediction that much. We expected that, since the serving team has a small disadvantage going into the point (.45%), as the point goes on that disadvantage would go away when both teams get to the kitchen line. This was what we saw.
+
+**Stacking:**
+None of the stacking variables (srv, rtrn switch) seemed to make much of a difference on the model.
+
 ## Conclusion
 Pickleball point winners are inherently hard to predict, since it is a binary outcome clouded by hundreds of small choices. Our goal was to find 
 
