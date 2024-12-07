@@ -250,15 +250,23 @@ Something that surprised us was that the length of the category didn't seem to a
 None of the stacking variables (srv, rtrn switch) seemed to make much of a difference on the model.
 
 ## Conclusion
-Pickleball point winners are inherently hard to predict, since it is a binary outcome clouded by hundreds of small choices. Our goal was to find 
+Pickleball point winners are inherently hard to predict, since it is a binary outcome clouded by hundreds of small choices. Our goal was to identify clear, actionable strategies that players can use to improve their chances of winning points by leveraging patterns and tendencies observed in gameplay.
 
-Strategy 1: As returning team, first 6 shots should be trying to force an error. Then, cool off during the 6-12 shots, and once the rally is back at equilibrium, look for winners and speedups to catch your opponent off guard.
+### Strategy 1: 
+**Change your priorities as the point progresses.** As the returning team, prioritize aggression during the first six shots of the rally to force opponents into making an error. After this initial phase, and the serving team is at the kitchen line, shift gears between shots 6-12 to allow the rally to return to equilibrium. Once balance is restored, actively seek opportunities for decisive winners or unexpected speedups to catch your opponents off guard.
 
-Strategy 2: Stack away!
+### Strategy 2: 
+**Don't feel forced to dink.** Our model predicted that the team that hit more dinks actually **lost** the point - mix in other types of shots and don’t let your opponents feel comfortable.
 
-Strategy 3: Don't be afraid to look for speedups.
+### Strategy 3: 
+**Don't be afraid to look for speedups.** Taking control of the rally by increasing the pace can break your opponents’ rhythm. Our model found that the first team to speed up generally won - however, pros normally speed up when they receive an attackable ball, so this metric may be correlation rather than causation.
 
-Strategy 4: Drive when you get a weak return. 
+### Strategy 4: 
+**Drive when you get a weak return.** Our model predicted that teams that drove on the third ball were more likely to win the point - however, based on the heatmap of where shots are hit, we can see that pros generally hit their drives when the return was more shallow, and dropped when the return was deep.
 
-Strategy 5: Don't feel forced to dink.
+### Strategy 5: 
+**Stack away!**  Our model found that stacking does not have a significant impact on the winner of points. By stacking, you ensure that both partners are playing on their strongest side, which can improve shot quality and court coverage.
+
+
+
 
