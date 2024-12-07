@@ -227,7 +227,10 @@ Classification Report:
 
 ### Hyperparameter Analysis
 One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
+
+
 ![Feature Importance with Directionality](assets/Feature_importance-directional.png "Feature Impotrance")
+
 ## Interesting Insights:
 
 Qualifiers - Our model is not perfect by any means, and this was trained on pro matches, so the takeaways may be different than amateur matches.
