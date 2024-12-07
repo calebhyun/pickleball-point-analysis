@@ -115,23 +115,27 @@ Additionally, we might want to analyze some of these shot types, in terms of whe
 
 This plot charts the comparison between rally length and dink count, but also includes the type of shot ending it had. From it, we can see that most of the low dink count, low rally length points ended in errors or unforced errors. As points went longer over 20 rallys with under 15 dinks they started ending with winners or another type of ending.
 
-**Interesting Shot Locations:**
-
 The following are three charts of shot locations that we found to be interesting.
 
-![Third Shot Drop Locations](assets/tsDrp_shots.png "Third Shot Drop Locations")
+**Third Shot Drop Locations**
+
+<img src="assets/tsDrp_shots.png" alt="Third Shot Drop Locations" width="500">
 
 As we can see from this image, the majority of the third shot drop locations are hit from the baseline. We can assume this means that the returned ball to the serving team was hit hard and deep into the court, forcing the serving team to hit a drop rather than a lob or a drive.
 
-![Third Shot Drive Locations](assets/tsDrp_shots.png "Third Shot Drive Locations")
+**Third Shot Drive Locations**
 
-From this image, we can see that the third shot drives are commonly hit from the baseline as well, but with one major difference from the third shot drop locations being that they were farther up and had a lower precision targeted on the baseline. This is reflected in professional game play, where players will opt for a third shot drive when the return ball is heat weaker and closer to the net. 
+<img src="assets/tsDrp_shots.png" alt="Third Shot Drive Locations" width="500">
 
-![Lob Locations](assets/lob_shots.png "Lob Locations")
+From this image, we can see that the third shot drives are commonly hit from the baseline as well, but with one major difference from the third shot drop locations being that they were farther up and had a lower precision targeted on the baseline. This is reflected in professional gameplay, where players will opt for a third shot drive when the return ball is hit weaker and closer to the net.
 
-This image demonstrates the lob locations in the matches. We can see that there are three hotspots where lobs are hit. The largest region is the back middle section, where players will be in 'no man's land' between the baseline and the kitchen area. This can force many awkward lobs. It is also where opponent's lobs land, so it could also be locations of a counter lob, after the team was already lobbed in the shot before.
+**Lob Locations**
 
-The next location is the right player's kitchen spot. This is interesting because the right player is hiting more lobs than the last hotspot of the left players kitchen spot. 
+<img src="assets/lob_shots.png" alt="Lob Locations" width="500">
+
+This image demonstrates the lob locations in the matches. We can see that there are three hotspots where lobs are hit. The largest region is the back middle section, where players will be in 'no man's land' between the baseline and the kitchen area. This can force many awkward lobs. It is also where opponents' lobs land, so it could also be the locations of a counter lob, after the team was already lobbed in the shot before.
+
+The next location is the right player's kitchen spot. This is interesting because the right player is hitting more lobs than the last hotspot of the left player's kitchen spot.
 
 
 
