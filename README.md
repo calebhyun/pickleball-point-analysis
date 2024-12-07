@@ -70,19 +70,39 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
 ></iframe>
 
 ### Univariate Analysis
+
 <iframe
   src="assets/rally_length_by_end_type.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+This plot is a collection of 4 box and whisker plots. As we can see from the chart, a majority of the unforced errors, and normal errors occur earlier in a point, typically within 5 or 6 shots. The majority of the winners occur after the 8 or 9 shot mark.
+
 <iframe
   src="assets/shot_type_distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
+First of all, that a majority of the shots aren't categorized, or are 'O' for other:
+'D' for Dink which is what is expected as the game of pickleball is centered around the net
+From this chart we can examine a number of things. Here are the descriptions and analyses of each category from left to right:
+      
+      'O' is for other, and a majority of the shots are uncategorized based on this
+      'D' is for dink, this is to be expected because the sport centers around dinks
+      'SE' is the serves 
+      'R' is the returns
+      'tsDrp' is the number of third shot drives
+      'tsDrv' is the number of third shot drops
+            interestingly enough, the third shot drop is more popular than the drive
+      'SP' is for speed ups
+      'L' is the number of lobs, we expect this, as lobs are not very popular 
+      'E' is for ernies, or shots where a player jumps over the kitchen to hit a volley
+      'tsL' is the number of third shot lobs, where this is clearly a last resort third shot
+      'A' is ATP's or around the post shots where the ball doesn't travel over the net
+      
 ### Bivariate Analysis
 <iframe
   src="assets/rally_length_vs_dink_count.html"
@@ -90,6 +110,8 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   height="600"
   frameborder="0"
 ></iframe>
+
+This plot charts the comparison between rally length and dink count, but also includes the type of shot ending it had. From it, we can see that most of the low dink count, low rally length points, ended in errors or unforced errors. As points went longer over 20 rallys with under 15 dinks they started ending with winners or another unspecified type of ending.
 
 ## To DO: insert two interesting bivariate analyses
 
@@ -146,7 +168,7 @@ We did not have to impute any values, we ended up not grabbing any rows where th
 We didn't fill any missing values because we didn't grab them, because we didn't want to predict on made-up data through imputation. We wanted to predict the outcome of points where we had all necessary data present.
 
 ## Framing a Prediction Problem
-We are going to predict the results of column 'w_team_id' which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
+We are going to predict the results of column 'Serve_team_won' which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
 
 This is a binary classification problem, and we are going to utilize the accuracy score to determine how effective our model was. Accuracy will let us understand how accurate our predictions were to the actual result of the point over the span of all of our points. 
 
@@ -168,8 +190,8 @@ Evaluation:
 While our Baseline model seemed to have reasonable accuracy, we noticed that the model was picking False much too often, likely because of the fact that the return team has an inherent ~10% advantage starting the point. However, even when the model WAS picking True, it was getting it wrong more than 50% of the time. This can help explain why the f1-score is so low for 'True' predictions. We assessed the performance using a classification report (precision, recall, F1-score) and a confusion matrix.
 
 Classification Report:
+      
                precision    recall  f1-score   support
-
        False       0.61      0.93      0.74       316
         True       0.46      0.09      0.15       208
 
@@ -204,7 +226,7 @@ For the final model, we used a **Random Forest Classifier** and improved upon th
 
 ### **Hyperparameter Tuning Results**
 - **Best Parameters**: `{'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 5}`
-- **Best Cross-Validation Accuracy**: **~90%**
+- **Best Cross-Validation Accuracy**: **~90%** huh is this right?
 
 ### **Performance Evaluation**
 - **Test Set Results**:
@@ -213,18 +235,17 @@ For the final model, we used a **Random Forest Classifier** and improved upon th
 
 ### **Comparison with Baseline**
 - The final model outperformed the baseline by capturing nuanced interactions through engineered features and Random Forest hyperparameter tuning.
-- Additionally, we saw that, whiile the model still predicted False too much, it predicted True correctly more often than not as opposed to our Baseline model. Our model seems to be very good at predicting whether the return team wins the point, but not as good at measuring whether the serve team wins the point. 
----
+- Additionally, we saw that, while the model still predicted False too much, it predicted True correctly more often than not as opposed to our Baseline model. Our model seems to be very good at predicting whether the return team wins the point, but not as good at measuring whether the serve team wins the point. 
+
 
 
 Classification Report:
+               
                precision    recall  f1-score   support
-
        False       0.67      0.80      0.73       316
         True       0.57      0.41      0.48       208
 
     accuracy                           0.65       524
-    Best Cross-Validation Accuracy: 0.5949079959852793
 <iframe
   src="assets/final_confusion_matrix.html"
   width="800"
@@ -232,15 +253,19 @@ Classification Report:
   frameborder="0"
 ></iframe>
 
-## Hyperparameter Analysis
+### Hyperparameter Analysis
 One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
 
 ## Conclusion
 Pickleball point winners are inherently hard to predict, since it is a binary outcome clouded by hundreds of small choices. Our goal was to find 
 
-Strategy 1: As returning team, first 6 shots should be trying to force an error. Then, cool off during the 6-12 shots, and once the rally is back at equilibrium, look for winners and speedups.
+Strategy 1: As returning team, first 6 shots should be trying to force an error. Then, cool off during the 6-12 shots, and once the rally is back at equilibrium, look for winners and speedups to catch your opponent off guard.
+
 Strategy 2: Stack away!
+
 Strategy 3: Don't be afraid to look for speedups.
+
 Strategy 4: Drive when you get a weak return. 
+
 Strategy 5: Don't feel forced to dink.
 
