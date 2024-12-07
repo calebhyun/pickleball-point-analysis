@@ -165,7 +165,7 @@ Train-Test Split: The dataset is split to ensure unbiased performance evaluation
 
 Evaluation:
 
-Performance is assessed using a classification report (precision, recall, F1-score) and a confusion matrix.
+While our Baseline model seemed to have reasonable accuracy, we noticed that the model was picking False much too often, likely because of the fact that the return team has an inherent ~10% advantage starting the point. However, even when the model WAS picking True, it was getting it wrong more than 50% of the time. This can help explain why the f1-score is so low for 'True' predictions. We assessed the performance using a classification report (precision, recall, F1-score) and a confusion matrix.
 
 Classification Report:
                precision    recall  f1-score   support
@@ -185,6 +185,38 @@ Classification Report:
 ></iframe>
 
 ## Final Model
+### Random Forest Classifier
+
+For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering 4 new features and tuning hyperparameters using GridSearchCV.
+
+### **Feature Engineering**
+1. **Interaction Features**
+   - **`dink_count_dif`:** Difference between serve and return dink counts. This describes the net dominance in dinks.
+   - **`speedup_count_dif`:** Difference between serve and return speedups. This describes aggression levels in rallies.
+   - **`lob_count_dif`:** Difference between serve and return count of lobs. 
+
+2. **Categorical Transformation**
+   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories, as we believed that once both teams have gotten past a certain number of shots, the inherent advantage the return team has goes away. We then one hot encoded these columns.
+   - we used binary encoding for features like `srv_switch_ind`.
+
+### **Modeling Algorithm**
+- **Random Forest Classifier**: We chose the Random Forest Classifier for its ability to capture complex feature interactions and handle a mix of numerical and categorical features. We hoped that the Random Forest would inherently be able to better model the complex, non-linear relationships between many of these features than Logistic Regression (for example, dink count vs speedup count).
+
+### **Hyperparameter Tuning Results**
+- **Best Parameters**: `{'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 5}`
+- **Best Cross-Validation Accuracy**: **~90%**
+
+### **Performance Evaluation**
+- **Test Set Results**:
+  - **Classification Report**: Our Final model improved precision, recall, and F1-scores compared to the baseline model.
+  - **Confusion Matrix**: Most significantly, our model reduced the number of false negatives.
+
+### **Comparison with Baseline**
+- The final model outperformed the baseline by capturing nuanced interactions through engineered features and Random Forest hyperparameter tuning.
+- Additionally, we saw that, whiile the model still predicted False too much, it predicted True correctly more often than not as opposed to our Baseline model. Our model seems to be very good at predicting whether the return team wins the point, but not as good at measuring whether the serve team wins the point. 
+---
+
+
 Classification Report:
                precision    recall  f1-score   support
 
@@ -199,4 +231,16 @@ Classification Report:
   height="600"
   frameborder="0"
 ></iframe>
+
+## Hyperparameter Analysis
+One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
+
 ## Conclusion
+Pickleball point winners are inherently hard to predict, since it is a binary outcome clouded by hundreds of small choices. Our goal was to find 
+
+Strategy 1: As returning team, first 6 shots should be trying to force an error. Then, cool off during the 6-12 shots, and once the rally is back at equilibrium, look for winners and speedups.
+Strategy 2: Stack away!
+Strategy 3: Don't be afraid to look for speedups.
+Strategy 4: Drive when you get a weak return. 
+Strategy 5: Don't feel forced to dink.
+
