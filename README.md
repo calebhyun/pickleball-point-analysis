@@ -16,30 +16,30 @@ After we have created a model, we will analyze the classifiers that made up this
 
 The columns we will utilize are as follows:
 
-      'w_team_id' - this is the column we are predicting, it is binarized to 1 for the serve team 
+`w_team_id` - this is the column we are predicting, it is binarized to 1 for the serve team 
       wins the point, 0 for the return team wins
       
-      'ts_type' - what the third shot type is in the match, this is done by the serving team
+`ts_type` - what the third shot type is in the match, this is done by the serving team
       
-      'rally_len' - the number of shots completed in this individual rally or point
+`rally_len` - the number of shots completed in this individual rally or point
       
-      'srv_switch_ind', 'rtrn_switch_ind', 'srv_team_flipped_ind', 'rtrn_team_flipped_in' - these 
+`srv_switch_ind`, `rtrn_switch_ind`, `srv_team_flipped_ind`, `rtrn_team_flipped_in` - these 
       columns are binarized talking about different methods of stacking in pickleball, 1 for if 
       they are doing that method of stacking, 0 if not
       
-      'lob_count_S', 'lob_count_R' - describes how many lobs each team hit in one point, 
+`lob_count_S`, `lob_count_R` - describes how many lobs each team hit in one point, 
       S for Serve, R for Return
       
-      'serve_dink_count', 'return_dink_count' - describes how many dinks each team hit 
+`serve_dink_count`, `return_dink_count` - describes how many dinks each team hit 
       in one point
       
-      'speedup_count_S', 'speedup_count_R' - describes how many speedups each team hit 
+`speedup_count_S`, `speedup_count_R` - describes how many speedups each team hit 
       in one point, S for Serve, R for Return
       
-      'first_to_speedup' - describes the first team to speedup the ball in each point, 
+`first_to_speedup` - describes the first team to speedup the ball in each point, 
       S for Serve, R for Return, or nan for neither team hit a speedup
       
-      'shot_type_orig' - describes the type of shot hit, utilized for combining the two dataframes 
+`shot_type_orig` - describes the type of shot hit, utilized for combining the two dataframes 
 
 ## Data Cleaning and Exploratory Data Analysis
 
@@ -91,20 +91,20 @@ Since there are a considerable amount of unforced error points, we will look at 
 
 From this chart we can examine a number of things. Here are the descriptions and analyses of each category from left to right:
       
-      `O` is for other, and a majority of the shots are uncategorized based on this
-      `D` is for dink, this is to be expected because the sport centers around dinks
-      `SE` is the serves 
-      `R` is the returns
-      `tsDrp` is the number of third shot drives
-      `tsDrv` is the number of third shot drops
-            interestingly enough, the third shot drop is more popular than the drive
-      `SP` is for speed ups
-      `L` is the number of lobs, we expect this, as lobs are not very popular 
-      `E` is for ernies, or shots where a player jumps over the kitchen to hit a volley
-      `tsL` is the number of third shot lobs, where this is clearly a last resort third shot
-      `A` is ATP's or around the post shots where the ball doesn't travel over the net
+`O` - other, and a majority of the shots are uncategorized based on this
+`D` - dink, this is to be expected because the sport centers around dinks
+`SE` - serves 
+`R` - returns
+`tsDrp` - number of third shot drives
+`tsDrv` - number of third shot drops interestingly enough, the third shot drop is more popular than the drive
+`SP` - speed ups
+`L` - number of lobs, we expect this, as lobs are not very popular 
+`E` - ernies, or shots where a player jumps over the kitchen to hit a volley
+`tsL` - number of third shot lobs, where this is clearly a last resort third shot
+ `A` - ATP's or around the post shots where the ball doesn't travel over the net
 
 Additionally, we might want to analyze some of these shot types, in terms of whether or not the type of third shot weighs a large part of the winner, or we could want to look at which team hit a speed up shot first during the point.
+
 ### Bivariate Analysis
 <iframe
   src="assets/rally_length_vs_dink_count.html"
