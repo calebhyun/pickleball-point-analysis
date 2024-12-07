@@ -6,15 +6,15 @@ Maxwell Cooper - maxwcoop@gmail.com
 
 ## Introduction
 
-This dataset is a collection of professional pickleball doubles matches found at pklmart.com. We were able to get 2 main dataframes through the use of the pklshop API. One dataframe contained information about 2500+ rallies across different 50 different pickleball matches. The next dataframe contained information about 22,000 shots from these rallies. We combined the results of these two dataframes into a final dataframe.
+We analyzed a dataset of professional pickleball doubles matches found at pklmart.com. We were able to get 2 main dataframes through the pklshop API. One dataframe contained information about 2500+ rallies across different 50 different professional pickleball matches. We also had information about 22,000 shots from these rallies, which we combined into a final dataframe.
 
 ### Point Analysis
 
-Through the use of this dataframe, we hope to be able to predict the winner of an individual pickleball point through machine learning models based on metrics found in these datasets. 
+Our goal was to predict the winner of an individual pickleball point through machine learning models based on metrics found in these datasets. 
 
-After we have created a model, we will analyze the classifiers that made up this model, and attempt to identify the most important features of what makes a winning point for each team. Ultimately, we would like to identify what exactly makes up a win in a doubles match to help improve pickleball performance.
+After creating the model, we analyzed the classifiers that made up this model, and attempted to identify the most important features of what makes a winning point for each team. Ultimately, we would like to identify what exactly makes up a win in a doubles match to help improve pickleball performance.
 
-The columns we will utilize are as follows:
+We utilized the following columns:
 
 `w_team_id` - this is the column we are predicting, it is binarized to 1 for the serve team 
       wins the point, 0 for the return team wins
@@ -45,12 +45,12 @@ The columns we will utilize are as follows:
 
 The pklshop API allowed us to get 2 main datasets. One was a dataset containing rallies indexed by game it occured in. The next was shots indexed by each rally.
 
-We will now combine these datasets into a final dataset of rallies indexed by game. But this dataset would now contain additional information that we got from the shots dataframe.
+We combined these datasets into a final dataset of rallies indexed by game. This data also contained additional information that we got from the `shots` dataframe.
 
 The specific metrics we pulled are: Serve and Return team Dink Count, Serve and Return team Speedup count, Serve and Return Team lob count, and which team did a speedup first.
 
 ### Data Cleaning
-First, we have to create a combined_rallies dataset by appending all of the rallies game by game.
+First, we created a combined_rallies dataset by appending all of the rallies game by game.
 
 Similarly, we accessed the shots rally by rally, to create our final combined_shots dataset: 
 
@@ -78,9 +78,9 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
   frameborder="0"
 ></iframe>
 
-This plot is a collection of 4 box and whisker plots. As we can see from the chart, a majority of the unforced errors, and normal errors occur earlier in a point, typically within 5 or 6 shots. The majority of the winners occur after the 8 or 9 shot mark. This causes us to want to look into the rally length as a distinguishing factor of our eventual model.
+This plot is a collection of 4 box and whisker plots. As we can see from the chart, a majority of the unforced errors, and normal errors occur earlier in a point, typically within 5 or 6 shots. The majority of the winners occur after ~9 shots. This causes us to want to look into the rally length as a possible parameter to our eventual model.
 
-Since there are a considerable amount of unforced error points, we will look at removing this column because they are classified as a mistake made by the losing team, not because of the opposing team's effort.
+We decided to remove rallies that ended due to an `unforced_error`, as these are hard to predict and result from mistakes by the losing team rather than efforts by the opposing team.
 
 <iframe
   src="assets/shot_type_distribution.html"
@@ -89,7 +89,7 @@ Since there are a considerable amount of unforced error points, we will look at 
   frameborder="0"
 ></iframe>
 
-From this chart we can examine a number of things. Here are the descriptions and analyses of each category from left to right:
+This chart tells us how many total shots were hit in our shots dataset. Here are the descriptions and analyses of each category from left to right:
       
 `O` - other, and a majority of the shots are uncategorized based on this
 `D` - dink, this is to be expected because the sport centers around dinks
@@ -113,7 +113,7 @@ Additionally, we might want to analyze some of these shot types, in terms of whe
   frameborder="0"
 ></iframe>
 
-This plot charts the comparison between rally length and dink count, but also includes the type of shot ending it had. From it, we can see that most of the low dink count, low rally length points, ended in errors or unforced errors. As points went longer over 20 rallys with under 15 dinks they started ending with winners or another unspecified type of ending.
+This plot charts the comparison between rally length and dink count, but also includes the type of shot ending it had. From it, we can see that most of the low dink count, low rally length points ended in errors or unforced errors. As points went longer over 20 rallys with under 15 dinks they started ending with winners or another type of ending.
 
 ## To DO: insert two interesting bivariate analyses
 
@@ -124,16 +124,9 @@ We created a final analysis dataframe, where along with other columns from the o
 
 ### Final DataFrame
 
+# insert html here!
 
-| w_team_id   | srv_team_id   | rally_id   | ts_type   | srv_switch_ind   | rtrn_switch_ind   | srv_team_flipped_ind   | rtrn_team_flipped_ind   |   rally_len |   serve_dink_count |   return_dink_count |   speedup_count_S |   speedup_count_R |   lob_count_S |   lob_count_R | first_to_speedup   | srv_team_won   |
-|:------------|:--------------|:-----------|:----------|:-----------------|:------------------|:-----------------------|:------------------------|------------:|-------------------:|--------------------:|------------------:|------------------:|--------------:|--------------:|:-------------------|:---------------|
-| T1          | T2            | R47        | Drop      | N                | N                 | Y                      | N                       |           7 |                  1 |                   1 |                 0 |                 1 |             0 |             0 | R                  | False          |
-| T1          | T1            | R49        | Drop      | Y                | N                 | N                      | Y                       |           9 |                  0 |                   1 |                 1 |                 0 |             0 |             0 | S                  | True           |
-| T2          | T1            | R52        | Drop      | N                | N                 | Y                      | Y                       |           7 |                  0 |                   0 |                 0 |                 0 |             1 |             0 | nan                | False          |
-| T2          | T1            | R1         | Drive     | N                | Y                 | N                      | N                       |           5 |                  0 |                   0 |                 0 |                 0 |             0 |             0 | nan                | False          |
-| T2          | T2            | R2         | Drop      | Y                | N                 | N                      | N                       |          21 |                  4 |                   4 |                 1 |                 0 |             0 |             0 | S                  | True           |
-
-These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are `srv_team_id` and `rally_id`, these columns are just indexes essentially. They helped us match up shot data to be aggregated into the final dataframe. 
+These are the first 5 rows of our final dataframe. Some columns to note that weren't referenced earlier are `srv_team_id` and `rally_id`: these columns are just indexes. They helped us match up shot data to be aggregated into the final dataframe. 
 
 This dataframe is what we will be running our models on. We are going to utilize multiple features to predict the outcome of an individual point 
 
@@ -143,7 +136,7 @@ We did not have to impute any values, we ended up not grabbing any rows where th
 We didn't fill any missing values because we didn't grab them, because we didn't want to predict on made-up data through imputation. We wanted to predict the outcome of points where we had all necessary data present.
 
 ## Framing a Prediction Problem
-We are going to predict the results of column `Serve_team_won` which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
+We are going to predict the results of column `srv_team_won` which is a binary column with 1 for serve team wins, and 0 for return team wins. We are predicting this column because we want to gather what features allow us to actually make the predictions, and what matters the most for the models accuracy. 
 
 This is a binary classification problem, and we are going to utilize the accuracy score to determine how effective our model was. Accuracy will let us understand how accurate our predictions were to the actual result of the point over the span of all of our points. 
 
@@ -272,7 +265,3 @@ Pickleball point winners are inherently hard to predict, since it is a binary ou
 
 ### Strategy 5: 
 **Stack away!**  Our model found that stacking does not have a significant impact on the winner of points. By stacking, you ensure that both partners are playing on their strongest side, which can improve shot quality and court coverage.
-
-
-
-
