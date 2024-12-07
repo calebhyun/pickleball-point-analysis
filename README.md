@@ -252,7 +252,7 @@ Classification Report:
   frameborder="0"
 ></iframe>
 
-### Hyperparameter Analysis
+### Feature Analysis
 One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
 
 
