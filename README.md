@@ -1,8 +1,8 @@
 # Pickleball Point Analysis
 
-Caleb Hyun - ckhyun@umich.edu
+Caleb Hyun - <a href='mailto:ckhyun@umich.edu'>ckhyun@umich.edu</a>
 
-Maxwell Cooper - maxwcoop@gmail.com
+Maxwell Cooper - <a href='mailto:maxwcoop@gmail.com'>maxwcoop@gmail.com</a>
 
 ## Introduction
 
@@ -210,22 +210,24 @@ While our Baseline model seemed to have reasonable accuracy, we noticed that the
 ## Final Model
 ### Random Forest Classifier
 
-For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering 4 new features and tuning hyperparameters using GridSearchCV.
+For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering 4 new features and tuning hyperparameters using `GridSearchCV`.
 
-### **Feature Engineering**
+## **Feature Engineering**
 1. **Interaction Features**
-   - **`dink_count_dif`:** Difference between serve and return dink counts. This describes the net dominance in dinks.
-   - **`speedup_count_dif`:** Difference between serve and return speedups. This describes aggression levels in rallies.
-   - **`lob_count_dif`:** Difference between serve and return count of lobs. 
+   - **`dink_count_dif`:** Difference between serve and return dink counts. This captures the net dominance in dinks.
+   - **`speedup_count_dif`:** Difference between serve and return speedups. This reflects aggression levels in rallies.
+   - **`lob_count_dif`:** Difference between serve and return teams lobs.
 
 2. **Categorical Transformation**
-   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories, as we believed that once both teams have gotten past a certain number of shots, the inherent advantage the return team has goes away. We then one hot encoded these columns.
-   - we used binary encoding for features like `srv_switch_ind`.
+   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories.
+   - Binary encoding for features like `srv_switch_ind`.
 
-### **Modeling Algorithm**
-- **Random Forest Classifier**: We chose the Random Forest Classifier for its ability to capture complex feature interactions and handle a mix of numerical and categorical features. We hoped that the Random Forest would inherently be able to better model the complex, non-linear relationships between many of these features than Logistic Regression (for example, dink count vs speedup count).
-
-
+## **Modeling Algorithm**
+- **Random Forest Classifier**: We chose the random forest model because it inherently models the complex, non-linear features better than a logistic regression model. It can also capture interactions between the features better than logistic regression.
+- **Hyperparameter Tuning**:
+  - **`n_estimators`:** Number of trees in the forest. Tuning this controls the trade-off between model accuracy and training time, as more trees typically improve performance up to a point.
+  - **`max_depth`:** Controls tree depth to prevent overfitting. Tuning this ensures that trees are not too deep (overfitting) or too shallow (underfitting), balancing model complexity.
+  - **`classifier_min_samples_split`:** Controls the minimum number of samples to split a node in a decision tree. Tuning this prevents overly complex trees by ensuring splits occur only when enough data supports them.
 
 ### **Performance Evaluation**
 - **Test Set Results**:
@@ -235,7 +237,6 @@ For the final model, we used a **Random Forest Classifier** and improved upon th
 ### **Comparison with Baseline**
 - The final model outperformed the baseline by capturing nuanced interactions through engineered features and Random Forest hyperparameter tuning.
 - Additionally, we saw that, while the model still predicted False too much, it predicted True correctly more often than not as opposed to our Baseline model. Our model seems to be very good at predicting whether the return team wins the point, but not as good at measuring whether the serve team wins the point. 
-
 
 
 Classification Report:
