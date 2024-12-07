@@ -256,9 +256,13 @@ Classification Report:
 One of our stated goals was to figure out how we could change our game based on the most important hyperparameters to our model. 
 
 
-![Feature Importance with Directionality](assets/Feature_importance-directional.png "Feature Importance")
+**Feature Importance with Directionality**
 
-![Dink_Count_Dif](assets/dink_count_dif_chart.png "Dink Count Difference Impacts")
+<img src="assets/Feature_importance-directional.png" alt="Feature Importance with Directionality" width="500">
+
+**Dink Count Difference Impacts**
+
+<img src="assets/dink_count_dif_chart.png" alt="Dink Count Difference Impacts" width="500">
 
 ## Interesting Insights:
 
