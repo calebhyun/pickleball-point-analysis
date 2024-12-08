@@ -4,7 +4,7 @@ Caleb Hyun - <a href='mailto:ckhyun@umich.edu'>ckhyun@umich.edu</a>
 
 Maxwell Cooper - <a href='mailto:maxwcoop@gmail.com'>maxwcoop@gmail.com</a>
 
-<a href='https://colab.research.google.com/drive/188fhIAnGwSyy9-qEvqacct2RG3GNOzxK?usp=sharing'> Link to Analysis <\a>
+<a href='https://colab.research.google.com/drive/188fhIAnGwSyy9-qEvqacct2RG3GNOzxK?usp=sharing' target = _blank> Link to Analysis </a>
 
 
 ## Introduction
