@@ -174,6 +174,8 @@ This is a binary classification problem, and we are going to utilize the accurac
 
 On top of this, since we would like to determine what factors make up a winning point, we excluded any row that has an ending classified as an **'Unforced Error'**. This allows us to get more accurate data for a winning point with either a forced error, winner, or other, not a classified mistake by a player.
 
+During a live match, we wouldn't have the information and features utilized before the point is over, but we aren't trying to predict live odds or who is going to win the current played point. We are instead analyzing previously played points to try to determine their winner, then from there we want to analyze what important features made up the winning teams chances/our prediction.
+
 ## Baseline Model
 
 Features: The baseline model uses rally length, serve team dink count (quantitative), and third shot type (nominal).
@@ -210,20 +212,33 @@ Pipeline: A ColumnTransformer scales numerical features and encodes categorical 
 
 While our Baseline model seemed to have reasonable accuracy, we noticed that the model was picking False much too often, likely because of the fact that the return team has an inherent ~10% advantage starting the point. However, even when the model WAS picking True, it was getting it wrong more than 50% of the time. This can help explain why the f1-score is so low for 'True' predictions. We assessed the performance using a classification report (precision, recall, F1-score) and a confusion matrix.
 
+Overall, we don't think this model is incredible because if we had just predicted the return team to win every time, we would end up with a ~55% accuracy. So our model can definitely be improved. We would also like to see more True values predicted as it feels like our model is just predicting mostly false without a lot of reason to it, and that is why our accuracy is marginally higher than 55%.
+
 
 ## Final Model
 ### Random Forest Classifier
 
 For the final model, we used a **Random Forest Classifier** and improved upon the baseline model by engineering 4 new features and tuning hyperparameters using `GridSearchCV`.
 
+## **Features Addded**
+
+**numerical added:** `dink_count_dif`, `speedup_count_dif`, `lob_count_dif`
+
+**categorical added:** `rally_len_categorical`, `srv_switch_ind`, `rtrn_switch_ind`, `srv_team_flipped_ind`, `rtrn_team_flipped_ind`, `first_to_speedup`
+
+We added variables that relate to stacking: `srv_switch_ind`, `rtrn_switch_ind`, `srv_team_flipped_ind`, `rtrn_team_flipped_ind` as we believed that they might have an impact on the winner of the point. 
+
+We also added `first_to_speedup` as we believed that this might shed light into who was playing more aggressively, ultimately benefitting our models prediction on which team ends up winning.
+
+
 ## **Feature Engineering**
 1. **Interaction Features**
-   - **`dink_count_dif`:** Difference between serve and return dink counts. This captures the net dominance in dinks.
-   - **`speedup_count_dif`:** Difference between serve and return speedups. This reflects aggression levels in rallies.
-   - **`lob_count_dif`:** Difference between serve and return teams lobs.
+   - **`dink_count_dif`:** Difference between serve and return dink counts. This captures the net dominance in dinks. We decided to add this as a feature because we didn't want to overfit to a large number of dinks: we believed that the important metric was the differential between serve and return team dinks.
+   - **`speedup_count_dif`:** Difference between serve and return speedups. This reflects aggression levels in rallies. We decided to add the speedup count difference as well for the same reason as the dink count difference, that the difference between the number hit mattered more than just the number hit by each team.
+   - **`lob_count_dif`:** Difference between serve and return teams lobs. Same reason here as well, the number of lobs hit difference could fit the model better than the raw number of lobs per team.
 
 2. **Categorical Transformation**
-   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories.
+   - **`rally_len_categorical`:** Converted `rally_len` into short, medium, and long categories. Again, we didn't want to overfit too heavily on the numerical rally length (even with scaling) so we  decidde to bin them based on length. So we utilized the 33rd and 66th percentiles as our bin metrics. Under 5 shots, was a short rally, under 11 was a medium rally, and anything over 11 is long. We belived that the difference between a 15 shot rally and a 25 shot rally isn't that large and we could get better results through this categorization. 
    - Binary encoding for features like `srv_switch_ind`.
 
 ## **Modeling Algorithm**
