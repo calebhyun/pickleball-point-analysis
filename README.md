@@ -1,4 +1,4 @@
-# Pickleball Point Analysis
+# How do I win a Pickleball Point?
 
 Caleb Hyun - <a href='mailto:ckhyun@umich.edu'>ckhyun@umich.edu</a>
 
