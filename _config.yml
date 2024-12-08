@@ -2,11 +2,11 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
   - jekyll-toc
+  - jekyll-seo-tag
+
 toc:
-  min_level: 1
-  max_level: 2
+  min_level: 2
+  max_level: 4
   no_toc_section_class: 'no_toc'
   list_class: 'table-of-contents'
   list_item_class: 'toc-item'
-
-  
