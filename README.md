@@ -65,12 +65,13 @@ Similarly, we accessed the shots rally by rally, to create our final combined_sh
              'rtrn_team_flipped_ind', 'ending_type', 'ending_player_id', 'lob_cnt',
              'dink_cnt', 'maint_dtm', 'maint_app', 'create_dtm', 'create_app'],
             dtype='object')
-<iframe
-  src="assets/combined_shots_table.md"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+| shot_id   | rally_id   |   shot_nbr | shot_type_orig   | shot_type   | player_id   |   entry_ts |   btt_before |   btt_after |   loc_x |   loc_y |   next_loc_x |   next_loc_y |   cst_model_id |   whtb_model_id | maint_dtm                        | maint_app   | create_dtm                       | create_app   |
+|:----------|:-----------|-----------:|:-----------------|:------------|:------------|-----------:|-------------:|------------:|--------:|--------:|-------------:|-------------:|---------------:|----------------:|:---------------------------------|:------------|:---------------------------------|:-------------|
+| S467      | R47        |          1 | SE               | SE          | P4          |        nan |          nan |         nan |     nan |     nan |          nan |          nan |            nan |             nan | 2022-07-30 21:41:10.918407+00:00 | aspancak    | 2022-04-09 03:19:34.047765+00:00 | postgres     |
+| S468      | R47        |          2 | R                | R           | P1          |        nan |          nan |         nan |     nan |     nan |          nan |          nan |            nan |             nan | 2022-07-30 21:41:10.918407+00:00 | aspancak    | 2022-04-09 03:19:34.048099+00:00 | postgres     |
+| S469      | R47        |          3 | tsDrp            | tsDrp       | P4          |        nan |          nan |         nan |     nan |     nan |          nan |          nan |            nan |             nan | 2022-07-30 21:41:10.918407+00:00 | aspancak    | 2022-04-09 03:19:34.048423+00:00 | postgres     |
+| S470      | R47        |          4 | D                | D           | nan         |        nan |          nan |         nan |     nan |     nan |          nan |          nan |            nan |             nan | 2022-07-30 21:41:10.918407+00:00 | aspancak    | 2022-04-09 03:19:34.048739+00:00 | postgres     |
+| S471      | R47        |          5 | D                | D           | nan         |        nan |          nan |         nan |     nan |     nan |          nan |          nan |            nan |             nan | 2022-07-30 21:41:10.918407+00:00 | aspancak    | 2022-04-09 03:19:34.049060+00:00 | postgres     |
 
 ### Univariate Analysis
 
