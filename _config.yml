@@ -12,8 +12,5 @@ plugins:
 #   list_class: 'table-of-contents'
 #   list_item_class: 'toc-item'
 
-title: "How do I win a Pickleball Point?"
-description: "Predicting the winner of a pickleball point"
-baseurl: ""
-url: "https://username.github.io"
-markdown: kramdown
+
+
