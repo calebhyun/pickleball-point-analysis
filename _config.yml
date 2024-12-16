@@ -1,12 +1,19 @@
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
-  - jekyll-toc
+  # - jekyll-toc   # Remove or comment this out if you don't need it
   - jekyll-seo-tag
 
-toc:
-  min_level: 2
-  max_level: 4
-  no_toc_section_class: 'no_toc'
-  list_class: 'table-of-contents'
-  list_item_class: 'toc-item'
+# If not using jekyll-toc at all, you don't need these settings:
+# toc:
+#   min_level: 2
+#   max_level: 4
+#   no_toc_section_class: 'no_toc'
+#   list_class: 'table-of-contents'
+#   list_item_class: 'toc-item'
+
+title: "How do I win a Pickleball Point?"
+description: "Predicting the winner of a pickleball point"
+baseurl: ""
+url: "https://username.github.io"
+markdown: kramdown
