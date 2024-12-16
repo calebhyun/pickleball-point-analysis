@@ -1,7 +1,3 @@
----
-layout: default
-title: "How do I win a Pickleball Point?"
----
 
 # How do I win a Pickleball Point?
 
